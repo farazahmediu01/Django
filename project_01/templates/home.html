@@ -1,0 +1,15 @@
+<h1>List off all Post</h1>
+
+
+
+    {% for post in post_list reversed%}
+    <h2><a href="{% url 'detail_view' post.id %}">{{post.title}}</a></h2>
+    <h3>{{post.author}}</h3>
+    <p>{{post.body}}</p>
+    <br><br>
+
+
+
+    {% empty %}
+        <li>There is no post to show.</li>
+    {% endfor %}
