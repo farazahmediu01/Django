@@ -1,0 +1,8 @@
+<H1>Home Page</H1>
+
+{% for room in room_list %}
+<h2>ROOM <a href="{% url 'room_detail' room.id %}">{{room.name}}</a></h2> 
+Status: <em>{{room.status }}</em>
+<p>{{room.details}} <strong>Price ${{room.price}}</strong></p>
+
+{% endfor %}

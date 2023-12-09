@@ -1,3 +1,11 @@
 <h2>Create Post</h2>
 
-<form action=""></form>
+<form method="post">
+
+    {% csrf_token %}
+    
+        {{form.as_p}}
+    
+    <button>Submit</button>
+
+</form>

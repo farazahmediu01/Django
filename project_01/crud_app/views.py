@@ -3,19 +3,16 @@ from django import forms
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
-from crud_app.models import Post
-
-
+from .models import Post
 
 class CreatePostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['title', 'author', 'body']
 
-        widgets = {
-            'body': forms.Textarea(attrs={'rows': 5}),
-        }
-
+        # widgets = {
+        #     'body': forms.Textarea(attrs={'rows': 3}),
+        # }
 
 
 # Create your views here.
@@ -30,7 +27,7 @@ def create(request):
             data = Post(title=title, author=author, body=body)
             data.save()
 
-            return HttpResponseRedirect(reverse("home"))
+            # return HttpResponseRedirect(reverse("home"))
         else:
             return render(request, "create.html",{
                 "form": submitted_form
@@ -42,7 +39,6 @@ def create(request):
     })
 
 
-
 def home(request):
     post_list = Post.objects.all() # Select all from Post
     
@@ -51,12 +47,9 @@ def home(request):
     })
 
 
-
-
 def detail_view(request, id):
     post = Post.objects.get(pk=id) #Select post that matches specific id
     
     return render(request, "detail.html",{
         "post": post,
     })
-
