@@ -1,11 +1,57 @@
+<head>
+    <!-- Add these lines to your HTML template -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+
 <h2>Create Post</h2>
 
-<form method="post">
+<form method="post" action={% url 'post_new' %}>
 
     {% csrf_token %}
-    
-        {{form.as_p}}
-    
+
+    {{form.as_p}}
+
     <button>Submit</button>
 
 </form>
+
+<!-- {% if post_created %}
+<script>
+    alert("Post Created Successfully...!")
+</script>
+{% endif %} -->
+
+
+{% if post_created %}
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Success</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{ messages }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  var $ = jQuery.noConflict();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<script>
+    // Add this script to show the modal
+    $(document).ready(function () {
+        $('#successModal').modal('show');
+    });
+    console.log("hogya")
+</script>
+{% endif %}

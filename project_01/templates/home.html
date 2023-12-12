@@ -2,7 +2,7 @@
 
 
 
-    {% for post in post_list reversed%}
+    {% for post in post_list %}
     <h2><a href="{% url 'post_detail' post.id %}">{{post.title}}</a></h2>
     <h3>{{post.author}}</h3>
     <p>{{post.body}}</p>
