@@ -4,9 +4,6 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django import forms
 
-
-
-
 from .models import Post
 
 class CreatePostForm(forms.ModelForm):
@@ -60,19 +57,44 @@ def home_view(request): # list_view
 
 def detail_view(request, id):
     post = Post.objects.get(pk=id) #Select post that matches specific id
-    
+
     return render(request, "detail.html",{
         "post": post,
     })
 
+
+def fetch_delete_view(request, id):
+    post = Post.objects.get(pk=id)
+    
+    return render(request, "delete.html", {
+        "post": post,
+    })
+
+
 def delete_view(request, id):
     post = Post.objects.get(pk=id)
     post.delete()
+    return redirect("home")
+    # return HttpResponseRedirect( reverse("home") )
 
-    return HttpResponseRedirect( reverse(f"home") )
 
-def fetch_view(request):
-    pass
+def fetch_update_view(request, id):
+    post = Post.objects.get(pk=id)
+    form = CreatePostForm(instance=post)
+    return render(request, "update.html", {
+        "form": form,
+        "post": post,
+    })
 
-def update_view(request):
-    pass
+def update_view(request, id):
+    post = Post.objects.get(pk=id)
+    form = CreatePostForm(request.POST, instance=post)
+    if form.is_valid():
+        form.save()
+
+        return redirect(post.get_absolute_url())
+    else:
+        return render(request, "update.html",{
+            "form": form,
+            "post": post,
+        })

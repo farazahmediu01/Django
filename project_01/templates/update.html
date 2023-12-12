@@ -1,0 +1,9 @@
+<h2>Update Form</h2>
+
+<form method="post" action="{% url 'update' post.id %}">
+
+    {%csrf_token%}
+    {{form.as_p}}
+    <button>Submit</button>
+
+</form>

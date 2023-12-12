@@ -1,0 +1,6 @@
+<h2>Delete Post</h2>
+<form method="post" action="{% url 'delete' post.id%}">
+    {% csrf_token %}
+    <p>Are you sure you want to delete <strong>"{{post.title.title}}"</strong>?</p>
+    <button>Confirm</button>
+</form>

@@ -1,0 +1,13 @@
+<h2>Edit Post</h2>
+<!-- 
+<h1>{{post.title}}</h1>
+<h3>{{post.author}}</h3>
+<p>{{post.body}}</p>
+ -->
+
+
+<form method="post" action="{% url 'edit' %}">
+    {%csrf_token%}
+    {{form}}
+    <button>Submit</button>
+</form>
